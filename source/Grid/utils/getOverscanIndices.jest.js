@@ -9,14 +9,16 @@ describe('getOverscanIndices', () => {
     startIndex,
     stopIndex,
     overscanCellsCount,
-    scrollDirection
+    scrollDirection,
+    reverseOverscanCellsCount
   }) {
     return getOverscanIndices({
       cellCount,
       overscanCellsCount,
       scrollDirection,
       startIndex,
-      stopIndex
+      stopIndex,
+      reverseOverscanCellsCount
     })
   }
 
@@ -104,6 +106,22 @@ describe('getOverscanIndices', () => {
       })
     ).toEqual({
       overscanStartIndex: 10,
+      overscanStopIndex: 24
+    })
+  })
+
+  it('should overscan indices before visible area if specified', () => {
+    expect(
+      testHelper({
+        cellCount: 25,
+        startIndex: 10,
+        stopIndex: 20,
+        overscanCellsCount: 10,
+        reverseOverscanCellsCount: 10,
+        scrollDirection: SCROLL_DIRECTION_FORWARD
+      })
+    ).toEqual({
+      overscanStartIndex: 0,
       overscanStopIndex: 24
     })
   })

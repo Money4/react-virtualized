@@ -198,7 +198,9 @@ export default class Grid extends Component {
     onScroll: () => null,
     onSectionRendered: () => null,
     overscanColumnCount: 0,
+    reverseOverscanColumnCount: 0,
     overscanRowCount: 10,
+    reverseOverscanRowCount: 0,
     scrollingResetTimeInterval: DEFAULT_SCROLLING_RESET_TIME_INTERVAL,
     scrollToAlignment: 'auto',
     style: {},
@@ -629,7 +631,9 @@ export default class Grid extends Component {
       columnCount,
       height,
       overscanColumnCount,
+      reverseOverscanColumnCount,
       overscanRowCount,
+      reverseOverscanRowCount,
       rowCount,
       width
     } = props
@@ -675,7 +679,8 @@ export default class Grid extends Component {
         overscanCellsCount: overscanColumnCount,
         scrollDirection: scrollDirectionHorizontal,
         startIndex: this._renderedColumnStartIndex,
-        stopIndex: this._renderedColumnStopIndex
+        stopIndex: this._renderedColumnStopIndex,
+        reverseOverscanCellsCount: reverseOverscanColumnCount
       })
 
       const overscanRowIndices = getOverscanIndices({
@@ -683,7 +688,8 @@ export default class Grid extends Component {
         overscanCellsCount: overscanRowCount,
         scrollDirection: scrollDirectionVertical,
         startIndex: this._renderedRowStartIndex,
-        stopIndex: this._renderedRowStopIndex
+        stopIndex: this._renderedRowStopIndex,
+        reverseOverscanCellsCount: reverseOverscanRowCount
       })
 
       // Store for _invokeOnGridRenderedHelper()

@@ -11,18 +11,18 @@ export const SCROLL_DIRECTION_FORWARD = 1
  * @param startIndex Begin of range of visible cells
  * @param stopIndex End of range of visible cells
  */
-export default function getOverscanIndices ({ cellCount, overscanCellsCount, scrollDirection, startIndex, stopIndex }) {
+export default function getOverscanIndices ({ cellCount, overscanCellsCount, scrollDirection, startIndex, stopIndex, reverseOverscanCellsCount = 0 }) {
   let overscanStartIndex
   let overscanStopIndex
 
   switch (scrollDirection) {
     case SCROLL_DIRECTION_FORWARD:
-      overscanStartIndex = startIndex
+      overscanStartIndex = startIndex - reverseOverscanCellsCount
       overscanStopIndex = stopIndex + overscanCellsCount
       break
     case SCROLL_DIRECTION_BACKWARD:
       overscanStartIndex = startIndex - overscanCellsCount
-      overscanStopIndex = stopIndex
+      overscanStopIndex = stopIndex + reverseOverscanCellsCount
       break
   }
 

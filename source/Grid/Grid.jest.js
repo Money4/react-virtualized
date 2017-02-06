@@ -849,6 +849,24 @@ describe('Grid', () => {
       expect(helper.rowStopIndex()).toEqual(4)
     })
 
+    it('should overscan specified rows before', () => {
+      const helper = createHelper()
+      console.log('overscan before')
+      render(getMarkup({
+        onSectionRendered: helper.onSectionRendered,
+        columnCount: 6,
+        overscanColumnCount: 10,
+        overscanRowCount: 10,
+        reverseOverscanRowCount: 10,
+        scrollToRow: 15,
+        rowCount: 20
+      }))
+      expect(helper.rowStartIndex()).toEqual(11)
+      expect(helper.rowStopIndex()).toEqual(15)
+      expect(helper.rowOverscanStartIndex()).toEqual(1)
+      expect(helper.rowOverscanStopIndex()).toEqual(19)
+    })
+
     it('should set the correct scroll direction', () => {
       // Do not pass in the initial state as props, otherwise the internal state is forbidden from
       // updating itself
